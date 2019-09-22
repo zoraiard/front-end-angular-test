@@ -9,10 +9,16 @@ import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { UsersComponent } from './users/users.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsersComponent,
+    UsersListComponent,
+    UserDetailComponent
   ],
   imports: [
     AppRoutingModule,

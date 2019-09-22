@@ -7,6 +7,7 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+
 <style>
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -322,9 +323,77 @@
       <rect class="cls-1" width="400" height="400" />
       <path class="cls-2" d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"
       />
-    </svg>
-    
+    </svg>    
   </a>
 </div>
+<br>
+<ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-12">
+    <p-panel header="Angular Exercice" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-12 ui-md-4">
+              <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
+                  <input type="text" pInputText placeholder="Search">         
+              </div>
+          </div> 
+          <div class="ui-g-12 ui-md-4">
+              <button icon="pi pi-trash" pButton type="button" label="Delete selected" class="ui-button-secondary"></button>
+          </div>
+          <div class="ui-g-12 ui-md-4">
+              <button icon="pi pi-download" pButton type="button" label="Download CSV" class="ui-button-secondary"></button>
+          </div>
+      </div> 
+    </p-panel>  
+  </div>
+</div>
+
+<p-table [columns]="cols" [value]="users" 
+         [(selection)]="selectedUsers"   (onRowSelect)="onRowSelect($event)"
+         [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center;">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+            <th style="width:20em;text-align: center">Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+            <td style="text-align: center;">
+                <button pButton type="button" label="Show"   icon="pi pi-check" iconPos="left"></button>
+                <button pButton type="button" label="Delete" icon="pi pi-trash" iconPos="left" style="margin: 5px;"></button>
+            </td>      
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <ul>
+            <li *ngFor="let user of selectedUsers" style="text-align: left">
+                {{user.firstName + ' - ' + user.lastName }}
+            </li>
+        </ul>
+    </ng-template>
+</p-table>
+
 
 <router-outlet></router-outlet>

@@ -387,11 +387,14 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-        <ul>
-            <li *ngFor="let user of selectedUsers" style="text-align: left">
-                {{user.firstName + ' - ' + user.lastName }}
-            </li>
-        </ul>
+      <p>There are{{selectedUsers?.length > 1 ? '' : 's'}} 
+          {{selectedUsers?.length == null ? '0' : selectedUsers?.length}}
+          User{{selectedUsers?.length > 1 ? 's' : ''}} selected</p>
+      <ul>
+          <li *ngFor="let user of selectedUsers" style="text-align: left">
+              {{user.firstName + ' - ' + user.lastName }}
+          </li>
+      </ul>
     </ng-template>
 </p-table>
 

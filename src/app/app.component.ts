@@ -36,8 +36,7 @@ export class AppComponent {
 
   ngOnInit() {
     
-    this.userService.getUsers().then(users => this.users = users);
-    
+    this.userService.getUsers().then(users => this.users = users);    
     
     this.loadDate();
 
@@ -51,7 +50,10 @@ export class AppComponent {
       users => this.users = users,
       error =>{
         return;
-      } /* Tratamos erros aqui :) */ );    
-      
+      } /* Tratamos erros aqui :) */ );         
+  }
+
+  onRowSelect(){
+    
   }
 }

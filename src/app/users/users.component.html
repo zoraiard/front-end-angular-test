@@ -1,0 +1,30 @@
+
+<div class="ui-g ui-fluid center" >
+    <div class="ui-g-12 ui-md-8" >
+        <p-panel header="Angular Exercice" [toggleable]="true" 
+        [style]="{'margin-bottom':'20px'}">
+            <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" pInputText placeholder="Search">         
+                </div>
+            </div> 
+            <div class="ui-g-12 ui-md-4">
+                <button icon="pi pi-trash" 
+                    pButton type="button" label="Delete selected" (click)="deleteSelectd()"
+                    [disabled]="!selectedUsers?.length" class="ui-button-secondary"></button>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <button icon="pi pi-download" (click)="downloadCSV()" pButton type="button" label="Download CSV" class="ui-button-secondary"></button>
+            </div>
+        </div> 
+        </p-panel>  
+    </div>
+</div>
+
+<div class="ui-g-12 ui-md-2" ></div>
+
+<app-users-list [users]="users" (valueChange)='displayCounter($event)'></app-users-list>
+
+<div class="ui-g-12 ui-md-2"></div>

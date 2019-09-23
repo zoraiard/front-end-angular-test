@@ -1,0 +1,40 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="top-right"></p-toast>
+
+<p-panel header="{{title}}" [transitionOptions]="'0ms'">
+    <div class="container">        
+        <form autocomplete="off" #userFrm="ngForm" >
+            <div class="ui-g ui-fluid form-group">
+                <div class="ui-g-12 ui-md-6">
+                    <input placeholder="First Name" type="text"  pKeyFilter="int" name="firstName" maxlength="20" pInputText  [(ngModel)]="user.firstName" required > 
+                </div>
+                <div class="ui-g-12 ui-md-6">
+                    <input placeholder="Last Name" type="text"  pKeyFilter="int" name="lastName" maxlength="20" pInputText  [(ngModel)]="user.lastName" required > 
+                </div> 
+            <p-fieldset>
+                <p><strong>Age:</strong> {{user?.age}}</p>   
+                <p style="margin-top: 5px"><strong>Description:</strong></p>     
+                <p>{{user?.description}}</p>     
+            </p-fieldset>   
+            </div>          
+        </form>
+        <div class="ui-g ui-fluid center" >
+            <div class="ui-g-12 ui-md-4">
+                <button pButton type="button" label="Save" 
+                (click)="salveUser(user)"
+                [disabled]="!userFrm.form.valid"
+                style="margin-bottom:10px" class="ui-button-belt"></button>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <button pButton type="button" label="Cancel" (click)="confirm()" style="margin-bottom:10px" class="ui-button-belt"></button>
+            </div> 
+        </div> 
+     </div>
+</p-panel>
+
+
+
+

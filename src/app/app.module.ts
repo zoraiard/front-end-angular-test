@@ -15,6 +15,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { UsersComponent } from './users/users.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
     ReactiveFormsModule,
     FormsModule,
     FieldsetModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    NgxSpinnerModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

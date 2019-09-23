@@ -1,8 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
 
 const apiUrl = "http://localhost:3000/"
+
+const httpOptions = {
+   headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 export abstract class GenericService<T> {
    
@@ -29,17 +32,22 @@ export abstract class GenericService<T> {
    }
 
    alter(id: number, model: T): Observable<T> {
-      return this.http.put<T>(this.baseEndpoint + '/' + id, model);
+      return this.http.put<T>(this.baseEndpoint + '/' + id, model, httpOptions);
    }
 
    delete(id: number): Observable<any> {
-      return this.http.delete(this.baseEndpoint + '/' + id);
+      return this.http.delete(this.baseEndpoint + '/' + id, httpOptions);
    }
   
    save(model: T): Observable<T> {
-      return this.http.post<T>(this.baseEndpoint, model);
+      return this.http.post<T>(this.baseEndpoint, model, httpOptions);
    }
   
+   deleteProduct (id): Observable<T> {      
+      return this.http.delete<T>(this.baseEndpoint, httpOptions)
+
+   }
+
    private handleError<T> (operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
     

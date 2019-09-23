@@ -1,0 +1,45 @@
+<div class="ui-g-12 ui-md-8" >
+    <p-table [columns]="cols" [value]="users"
+            [(selection)]="selectedUsers"  
+            [paginator]="true" [rows]="5">
+            <ng-template pTemplate="caption">
+               {{title}}
+            </ng-template>    
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3em">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center;">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="width:20em;" class="center">Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td  class="center">
+                    <button pButton type="button" [routerLink]="['/user-details', rowData.id]" label="Show" icon="pi pi-check" iconPos="left"></button>
+                    <button pButton type="button" label="Delete" (click)="delete(rowData)"  icon="pi pi-trash" iconPos="left" style="margin: 5px;"></button>
+                </td>      
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <p>There are{{selectedUsers?.length > 1 ? '' : 's'}} 
+                {{selectedUsers?.length == null ? '0' : selectedUsers?.length}}
+                User{{selectedUsers?.length > 1 ? 's' : ''}} selected</p>
+            <ul>
+                <li *ngFor="let user of selectedUsers" style="text-align: left">
+                    {{user.firstName + ' - ' + user.lastName }}
+                </li>
+            </ul>
+        </ng-template>
+    </p-table>
+</div>

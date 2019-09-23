@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
-const APIHome = "http://localhost:3000/"
+const apiUrl = "http://localhost:3000/"
 
 export abstract class GenericService<T> {
    
@@ -13,11 +13,11 @@ export abstract class GenericService<T> {
    }
    
    setBaseEndpoint(endpoint){
-    this.baseEndpoint = APIHome+endpoint    
+      this.baseEndpoint = apiUrl+endpoint    
    }
    
    findAll(): Observable<T[]> {   
-      return this.http.get<T[]>(this.baseEndpoint); 
+      return this.http.get<T[]>(this.baseEndpoint);       
    }
    
    findById(id: string): Observable<T[]> {
@@ -40,4 +40,12 @@ export abstract class GenericService<T> {
       return this.http.post<T>(this.baseEndpoint, model);
    }
   
+   private handleError<T> (operation = 'operation', result?: T) {
+      return (error: any): Observable<T> => {
+    
+        console.error(error); 
+    
+        return of(result as T);
+      };
+   }
 }

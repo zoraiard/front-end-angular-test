@@ -49,7 +49,7 @@ export class UsersListComponent implements OnInit {
   }
 
   selectedUsersChanged(){
-    //this.selectedUsersChange.emit({this.selectedUsers}));   
+    //this.selectedUsersChange.emit();   
   }
 }
 

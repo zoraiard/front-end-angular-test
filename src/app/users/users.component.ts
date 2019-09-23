@@ -19,18 +19,13 @@ export class UsersComponent implements OnInit {
   csvDataService: CsvDataService;
   users: User[];
   options: any;
+
   constructor(private userService: UserService) { } 
   @Output() valueChange = new EventEmitter();
-  counter = 0;
 
   ngOnInit() {  
     this.csvDataService = new CsvDataService();
     this.loadData();   
-  }
-
-  valueChanged() { 
-     this.counter = this.counter + 1;
-     this.valueChange.emit(this.counter);
   }
 
   loadData(){
@@ -43,9 +38,5 @@ export class UsersComponent implements OnInit {
 
   downloadCSV() {
     this.csvDataService.exportToCsv("listUsers.csv", this.users)
-  }
-
-  displayCounter(count) {
-    console.log(count);
   }
 }
